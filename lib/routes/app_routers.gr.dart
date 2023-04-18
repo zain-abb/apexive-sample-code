@@ -14,10 +14,9 @@
 import 'package:auto_route/auto_route.dart' as _i4;
 import 'package:flutter/material.dart' as _i5;
 
-import '../features/auth/presentation/screens/authentication_screen.dart'
-    as _i2;
-import '../features/homepage/presentation/screens/homepage_screen.dart' as _i3;
-import '../features/splash/presentation/splash_screen.dart' as _i1;
+import '../features/auth/presentation/pages/login_page.dart' as _i2;
+import '../features/home/presentation/pages/home_page.dart' as _i3;
+import '../features/splash/presentation/splash_page.dart' as _i1;
 
 class FlutterRouter extends _i4.RootStackRouter {
   FlutterRouter([_i5.GlobalKey<_i5.NavigatorState>? navigatorKey])
@@ -28,19 +27,19 @@ class FlutterRouter extends _i4.RootStackRouter {
     SplashScreen.name: (routeData) {
       return _i4.MaterialPageX<bool>(
         routeData: routeData,
-        child: const _i1.SplashScreen(),
+        child: const _i1.SplashPage(),
       );
     },
-    AuthenticationScreen.name: (routeData) {
+    LoginRoute.name: (routeData) {
       return _i4.MaterialPageX<bool>(
         routeData: routeData,
-        child: const _i2.AuthenticationScreen(),
+        child: const _i2.LoginPage(),
       );
     },
-    HomepageScreen.name: (routeData) {
+    HomeRoute.name: (routeData) {
       return _i4.MaterialPageX<bool>(
         routeData: routeData,
-        child: const _i3.HomepageScreen(),
+        child: const _i3.HomePage(),
       );
     },
   };
@@ -52,18 +51,18 @@ class FlutterRouter extends _i4.RootStackRouter {
           path: '/',
         ),
         _i4.RouteConfig(
-          AuthenticationScreen.name,
-          path: '/authentication-screen',
+          LoginRoute.name,
+          path: '/login-screen',
         ),
         _i4.RouteConfig(
-          HomepageScreen.name,
+          HomeRoute.name,
           path: '/home-page',
         ),
       ];
 }
 
 /// generated route for
-/// [_i1.SplashScreen]
+/// [_i1.SplashPage]
 class SplashScreen extends _i4.PageRouteInfo<void> {
   const SplashScreen()
       : super(
@@ -75,25 +74,25 @@ class SplashScreen extends _i4.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i2.AuthenticationScreen]
-class AuthenticationScreen extends _i4.PageRouteInfo<void> {
-  const AuthenticationScreen()
+/// [_i2.LoginPage]
+class LoginRoute extends _i4.PageRouteInfo<void> {
+  const LoginRoute()
       : super(
-          AuthenticationScreen.name,
-          path: '/authentication-screen',
+          LoginRoute.name,
+          path: '/login-screen',
         );
 
-  static const String name = 'AuthenticationScreen';
+  static const String name = 'LoginRoute';
 }
 
 /// generated route for
-/// [_i3.HomepageScreen]
-class HomepageScreen extends _i4.PageRouteInfo<void> {
-  const HomepageScreen()
+/// [_i3.HomePage]
+class HomeRoute extends _i4.PageRouteInfo<void> {
+  const HomeRoute()
       : super(
-          HomepageScreen.name,
+          HomeRoute.name,
           path: '/home-page',
         );
 
-  static const String name = 'HomepageScreen';
+  static const String name = 'HomeRoute';
 }

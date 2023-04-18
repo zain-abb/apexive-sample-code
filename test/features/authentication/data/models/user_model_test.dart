@@ -1,12 +1,12 @@
 import 'dart:convert';
 
-import 'package:apexive/features/auth/data/models/user_model.dart';
+import 'package:apexive/features/auth/data/models/auth_user.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../../fixtures/fixture.dart';
 
 void main() {
-  final User user = User(firstName: 'Zain', lastName: 'Abbas');
+  final AuthUser user = AuthUser(firstName: 'Zain', lastName: 'Abbas');
   group(
     'json serialization ',
     () {
@@ -16,7 +16,7 @@ void main() {
           //arrange
           final jsonData = fixture('test_response.json');
           //act
-          final userModel = User.fromJson(jsonDecode(jsonData));
+          final userModel = AuthUser.fromJson(jsonDecode(jsonData));
           // assert
           expect(userModel, user);
         },

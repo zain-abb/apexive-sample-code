@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:apexive/core/service_locator.dart';
-import 'package:apexive/features/auth/data/models/user_model.dart';
+import 'package:apexive/features/auth/data/models/auth_user.dart';
 import 'package:apexive/services/user_cache_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -18,7 +18,7 @@ void main() {
     cacheService = UserCacheService();
   });
   group('User cache service tests ', () {
-    final User user = User.fromJson(jsonDecode(fixture('user_response.json')));
+    final AuthUser user = AuthUser.fromJson(jsonDecode(fixture('user_response.json')));
     test(
       'should return User if the user is cached',
       () async {

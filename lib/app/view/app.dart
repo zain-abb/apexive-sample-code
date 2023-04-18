@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../features/auth/presentation/bloc/authentication_bloc.dart';
-import '../../features/homepage/presentation/bloc/homepage_bloc.dart';
+import '../../features/auth/presentation/bloc/auth_bloc.dart';
+import '../../features/home/presentation/bloc/home_bloc.dart';
 import '../../routes/app_routers.gr.dart';
 
 class App extends StatelessWidget {
@@ -15,10 +15,10 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => AuthenticationBloc(),
+          create: (_) => AuthBloc(),
         ),
         BlocProvider(
-          create: (_) => HomepageBloc(),
+          create: (_) => HomeBloc(),
         ),
       ],
       child: MaterialApp.router(

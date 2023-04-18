@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:apexive/core/service_locator.dart';
-import 'package:apexive/features/auth/data/models/user_model.dart';
-import 'package:apexive/features/splash/domain/usecase/check_user_login_status.dart';
+import 'package:apexive/features/auth/data/models/auth_user.dart';
+import 'package:apexive/features/splash/domain/usecase/login_status_usecase.dart';
 import 'package:apexive/services/user_cache_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -11,14 +11,14 @@ import '../../../../fixtures/fixture.dart';
 
 void main() {
   late MockCacheService mockCacheService;
-  late CheckUserLoginStatus userUsecase;
+  late LoginStatusUsecase userUsecase;
   setUpAll(() {
-    userUsecase = CheckUserLoginStatusImpl();
+    userUsecase = LoginStatusUsecase();
     mockCacheService = MockCacheService();
     serviceLocator.registerFactory<UserCacheService>(() => mockCacheService);
   });
 
-  final User user = User.fromJson(jsonDecode(fixture('user_response.json')));
+  final AuthUser user = AuthUser.fromJson(jsonDecode(fixture('user_response.json')));
   group(
     'check user cache status ',
     () {

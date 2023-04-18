@@ -2,46 +2,46 @@ import 'package:apexive/core/request.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../features/auth/data/datasource/login_remote_datasource.dart';
-import '../features/auth/data/repository/login_user_repository.dart';
-import '../features/auth/domain/repository/authentication_user_repository.dart';
-import '../features/auth/domain/usecases/authentication_usecase.dart';
-import '../features/homepage/data/datasource/homepage_product_remote_source.dart';
-import '../features/homepage/data/datasource/homepage_user_local_data_source.dart';
-import '../features/homepage/data/repository/homepage_repository.dart';
-import '../features/homepage/domain/repository/homepage_repository.dart';
-import '../features/homepage/domain/usercases/get_local_user.dart';
-import '../features/homepage/domain/usercases/get_products.dart';
-import '../features/splash/domain/usecase/check_user_login_status.dart';
+import '../features/auth/data/datasource/auth_remote_datasource.dart';
+import '../features/auth/data/repository/auth_repository_impl.dart';
+import '../features/auth/domain/repository/auth_repository.dart';
+import '../features/auth/domain/usecases/auth_usecase.dart';
+import '../features/home/data/datasource/products_remote_source.dart';
+import '../features/home/data/datasource/user_local_data_source.dart';
+import '../features/home/data/repository/home_repository_impl.dart';
+import '../features/home/domain/repository/home_repository.dart';
+import '../features/home/domain/usecases/local_user_usecase.dart';
+import '../features/home/domain/usecases/products_usecase.dart';
+import '../features/splash/domain/usecase/login_status_usecase.dart';
 import '../services/user_cache_service.dart';
 
 final serviceLocator = GetIt.instance;
 
 Future<void> setUpServiceLocator() async {
   //check if user logged in or not
-  serviceLocator.registerFactory<CheckUserLoginStatus>(
-    () => CheckUserLoginStatusImpl(),
+  serviceLocator.registerFactory<LoginStatusUsecase>(
+    () => LoginStatusUsecase(),
   );
   // use-case
-  serviceLocator.registerFactory<LoginUserUsecase>(() => LoginUserUsecase());
+  serviceLocator.registerFactory<AuthUsecase>(() => AuthUsecase());
 
   //datasource
-  serviceLocator.registerFactory<LoginRemoteDataSource>(() => LoginRemoteDataSourceImpl());
+  serviceLocator.registerFactory<AuthRemoteDataSource>(() => AuthRemoteDataSourceImpl());
 
   //repositories
-  serviceLocator.registerFactory<LoginUserRepository>(() => LoginUserRepositoryImpl());
+  serviceLocator.registerFactory<AuthRepository>(() => AuthRepositoryImpl());
   //homepage user
   //use-case
-  serviceLocator.registerFactory<GetLocalUserUsecase>(() => GetLocalUserUsecase());
+  serviceLocator.registerFactory<LocalUserUsecase>(() => LocalUserUsecase());
 
   //datasource
-  serviceLocator.registerFactory<HomepageLocalUserDataSource>(() => HomepageLocalUserDataSourceImlp());
+  serviceLocator.registerFactory<UserLocalDataSource>(() => UserLocalDataSourceImlp());
 
   //repositories
-  serviceLocator.registerFactory<HomepageRepository>(() => HomepageRepositoryImpl());
+  serviceLocator.registerFactory<HomeRepository>(() => HomeRepositoryImpl());
   //homepage products
   //use-case
-  serviceLocator.registerFactory<GetProductsFromServer>(() => GetProductsFromServer());
+  serviceLocator.registerFactory<ProductsUsecase>(() => ProductsUsecase());
 
   //datasource
   serviceLocator.registerFactory<ProductsRemoteDataSource>(() => ProductsRemoteDataSourceImpl());

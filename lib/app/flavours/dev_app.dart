@@ -1,5 +1,5 @@
 import '../view/app.dart';
-import 'app_flavour.dart';
+import 'bootstrap.dart';
 
 void main() {
   bootstrap(() => App());

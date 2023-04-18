@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:apexive/core/failure.dart';
 import 'package:apexive/core/service_locator.dart';
-import 'package:apexive/features/auth/data/datasource/login_remote_datasource.dart';
-import 'package:apexive/features/auth/data/models/user_model.dart';
-import 'package:apexive/features/auth/data/repository/login_user_repository.dart';
+import 'package:apexive/features/auth/data/datasource/auth_remote_datasource.dart';
+import 'package:apexive/features/auth/data/models/auth_user.dart';
+import 'package:apexive/features/auth/data/repository/auth_repository_impl.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -13,13 +13,13 @@ import '../../../../fixtures/fixture.dart';
 
 void main() {
   late MockRemoteDataSource mockRemoteDataSource;
-  late LoginUserRepositoryImpl loginUserRepository;
+  late AuthRepositoryImpl loginUserRepository;
   setUpAll(() {
     mockRemoteDataSource = MockRemoteDataSource();
-    serviceLocator.registerFactory<LoginRemoteDataSource>(() => mockRemoteDataSource);
-    loginUserRepository = LoginUserRepositoryImpl();
+    serviceLocator.registerFactory<AuthRemoteDataSource>(() => mockRemoteDataSource);
+    loginUserRepository = AuthRepositoryImpl();
   });
-  final User user = User.fromJson(jsonDecode(fixture('user_response.json')));
+  final AuthUser user = AuthUser.fromJson(jsonDecode(fixture('user_response.json')));
 
   test(
     'should return User object on successful login',
@@ -49,4 +49,4 @@ void main() {
   );
 }
 
-class MockRemoteDataSource extends Mock implements LoginRemoteDataSourceImpl {}
+class MockRemoteDataSource extends Mock implements AuthRemoteDataSourceImpl {}

@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:apexive/core/failure.dart';
 import 'package:apexive/core/request.dart';
 import 'package:apexive/core/service_locator.dart';
-import 'package:apexive/features/auth/data/datasource/login_remote_datasource.dart';
-import 'package:apexive/features/auth/data/models/user_model.dart';
+import 'package:apexive/features/auth/data/datasource/auth_remote_datasource.dart';
+import 'package:apexive/features/auth/data/models/auth_user.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -14,18 +14,18 @@ import '../../../../fixtures/fixture.dart';
 
 void main() {
   late MockRequest mockRequest;
-  late LoginRemoteDataSourceImpl loginRemoteDataSource;
+  late AuthRemoteDataSourceImpl loginRemoteDataSource;
   setUpAll(
     () {
       mockRequest = MockRequest();
       serviceLocator.registerFactory<Request>(() => mockRequest);
-      loginRemoteDataSource = LoginRemoteDataSourceImpl();
+      loginRemoteDataSource = AuthRemoteDataSourceImpl();
     },
   );
   tearDownAll(() async {
     await serviceLocator.reset(dispose: true);
   });
-  final User user = User.fromJson(jsonDecode(fixture('user_response.json')));
+  final AuthUser user = AuthUser.fromJson(jsonDecode(fixture('user_response.json')));
   test(
     'should return user model on successful login',
     () async {
@@ -45,7 +45,7 @@ void main() {
         ),
       );
 
-      final response = await loginRemoteDataSource.loginUser(user: User.fromJson({}));
+      final response = await loginRemoteDataSource.loginUser(user: AuthUser.fromJson({}));
 
       expect(response, Right(user));
     },
@@ -70,7 +70,7 @@ void main() {
         ),
       );
 
-      final response = await loginRemoteDataSource.loginUser(user: User.fromJson({}));
+      final response = await loginRemoteDataSource.loginUser(user: AuthUser.fromJson({}));
 
       expect(
         response,
